@@ -3,7 +3,7 @@ package com.example.bp_2023_2024.models;
 import jakarta.persistence.*;
 
 import java.util.Date;
-import java.util.Set;
+
 
 @Entity
 public class OrderDetails {
@@ -15,7 +15,6 @@ public class OrderDetails {
     @ManyToOne
     @JoinColumn(name = "order_id")
     private OrderProject orderProjects;
-
     private String timeSpent;
     private String realTime;
     private String charge;
