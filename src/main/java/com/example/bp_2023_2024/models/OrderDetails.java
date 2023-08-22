@@ -13,7 +13,7 @@ public class OrderDetails {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "order_id")
+    @JoinColumn(name = "orderId")
     private OrderProject orderProjects;
     private String timeSpent;
     private String realTime;
