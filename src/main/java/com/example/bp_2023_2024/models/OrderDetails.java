@@ -37,6 +37,13 @@ public class OrderDetails {
     }
 
 
+    public OrderProject getOrderProjects() {
+        return orderProjects;
+    }
+
+    public void setOrderProjects(OrderProject orderProjects) {
+        this.orderProjects = orderProjects;
+    }
 
     public String getTimeSpent() {
         return timeSpent;

@@ -21,7 +21,7 @@ public class OrderProject {
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> users;
 
-    @OneToMany(mappedBy = "orderProject")
+    @OneToMany
     private List<OrderDetails> orderDetailsList;
 
     //constructors,getters,setters

@@ -13,7 +13,7 @@ public class TaskDepartment {
     private String taskName;
     private String department;
 
-    @OneToMany(mappedBy = "taskDepartment")
+    @OneToMany
     private List<OrderDetails> taskOrders;
 
     // Constructors, getters, setters
