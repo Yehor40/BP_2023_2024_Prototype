@@ -6,10 +6,11 @@ import java.util.List;
 @Entity
 public class OrderProject {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    private String orderId;
+    private Integer orderId;
     private String project;
+
 
     @ManyToOne
     @JoinColumn(name = "task_name")
@@ -21,16 +22,16 @@ public class OrderProject {
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> users;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<OrderDetails> orderDetailsList;
 
     //constructors,getters,setters
 
-    public String getOrderId() {
+    public Integer getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(String orderId) {
+    public void setOrderId(Integer orderId) {
         this.orderId = orderId;
     }
 
@@ -43,7 +44,7 @@ public class OrderProject {
     }
 
 
-    public OrderProject(String orderId, String project, TaskDepartment taskDepartment, List<User> users, List<OrderDetails> orderDetailsList) {
+    public OrderProject(Integer orderId, String project, TaskDepartment taskDepartment, List<User> users, List<OrderDetails> orderDetailsList) {
         this.orderId = orderId;
         this.project = project;
         this.taskDepartment = taskDepartment;

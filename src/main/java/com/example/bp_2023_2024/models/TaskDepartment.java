@@ -8,12 +8,12 @@ import java.util.List;
 public class TaskDepartment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer taskId;
     private String taskName;
     private String department;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<OrderDetails> taskOrders;
 
     // Constructors, getters, setters
@@ -22,9 +22,10 @@ public class TaskDepartment {
     public TaskDepartment() {
     }
 
-    public TaskDepartment(String taskName, String department) {
+    public TaskDepartment(String taskName, String department ,Integer taskId) {
         this.taskName = taskName;
         this.department = department;
+        this.taskId= taskId;
     }
 
     // Getters and setters
@@ -42,6 +43,14 @@ public class TaskDepartment {
 
     public void setDepartment(String department) {
         this.department = department;
+    }
+
+    public Integer getTaskId() {
+        return taskId;
+    }
+
+    public void setTaskId(Integer taskId) {
+        this.taskId = taskId;
     }
 }
 
