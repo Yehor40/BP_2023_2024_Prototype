@@ -9,6 +9,7 @@ import jakarta.persistence.*;
         private Long userId;
         private String username;
         private String password;
+        @Column(nullable = false, columnDefinition = "TINYINT(1)")
         private boolean isAdmin;
 
         // Getters and setters

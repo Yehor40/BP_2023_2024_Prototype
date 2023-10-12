@@ -3,6 +3,7 @@ package com.example.bp_2023_2024.controllers;
 import com.example.bp_2023_2024.models.User;
 import com.example.bp_2023_2024.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +28,9 @@ public class UserController {
         return user.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping
+    @PostMapping(path="createUser",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<User> createUser(@RequestBody User user) {
         User newUser = userService.createUser(user);
         return ResponseEntity.ok(newUser);
