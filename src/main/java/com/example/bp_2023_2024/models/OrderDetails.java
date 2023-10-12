@@ -13,6 +13,10 @@ public class OrderDetails {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "taskId")
+    private TaskDepartment taskDepartment;
+
+    @ManyToOne
     @JoinColumn(name = "orderId")
     private OrderProject orderProjects;
     private String timeSpent;

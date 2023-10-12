@@ -13,7 +13,7 @@ public class OrderProject {
 
 
     @ManyToOne
-    @JoinColumn(name = "task_name")
+    @JoinColumn(name = "task_id")
     private TaskDepartment taskDepartment;
 
     @ManyToMany
@@ -22,8 +22,8 @@ public class OrderProject {
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> users;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    private List<OrderDetails> orderDetailsList;
+//    @OneToMany(fetch = FetchType.EAGER)
+//    private List <OrderDetails> orderDetailsList;
 
     //constructors,getters,setters
 
@@ -49,7 +49,7 @@ public class OrderProject {
         this.project = project;
         this.taskDepartment = taskDepartment;
         this.users = users;
-        this.orderDetailsList = orderDetailsList;
+       // this.orderDetailsList = orderDetailsList;
     }
     public OrderProject(){}
 }

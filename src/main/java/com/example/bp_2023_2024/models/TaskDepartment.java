@@ -13,8 +13,8 @@ public class TaskDepartment {
     private String taskName;
     private String department;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    private List<OrderDetails> taskOrders;
+//    @OneToMany(fetch = FetchType.EAGER)
+//    private List<OrderDetails> taskOrders;
 
     // Constructors, getters, setters
 
