@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User details</title>
+</head>
+<body>
+<h2>User Details</h2>
+<a href="/users">Back</a>
+<p>ID: <span th:text="${user.userId}"></span></p>
+<p>Username: <span th:text="${user.username}"></span></p>
+<p>User password: <span th:text="${user.password}"></span></p>
+<p>User is admin: <span th:text="${user.isAdmin}"></span></p>
+</body>
+</html>
