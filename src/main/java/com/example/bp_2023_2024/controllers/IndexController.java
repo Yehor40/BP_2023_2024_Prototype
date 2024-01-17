@@ -7,8 +7,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class IndexController {
     @GetMapping("/")
     public String main(Model model) {
-        model.addAttribute("title","Main Page");
+        model.addAttribute("title", "Main Page");
         return "index";
+    }
+
+    @Controller
+    public class ErrorController {
+        @GetMapping("/error")
+        public String main(Model model) {
+            model.addAttribute("error", "Error Page");
+            return "error";
+        }
     }
 }
 

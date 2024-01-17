@@ -9,7 +9,7 @@ public class TaskDepartment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer taskId;
+    private Long taskId;
     private String taskName;
     private String department;
 
@@ -22,7 +22,7 @@ public class TaskDepartment {
     public TaskDepartment() {
     }
 
-    public TaskDepartment(String taskName, String department ,Integer taskId) {
+    public TaskDepartment(String taskName, String department ,Long taskId) {
         this.taskName = taskName;
         this.department = department;
         this.taskId= taskId;
@@ -45,11 +45,11 @@ public class TaskDepartment {
         this.department = department;
     }
 
-    public Integer getTaskId() {
+    public Long getTaskId() {
         return taskId;
     }
 
-    public void setTaskId(Integer taskId) {
+    public void setTaskId(Long taskId) {
         this.taskId = taskId;
     }
 }

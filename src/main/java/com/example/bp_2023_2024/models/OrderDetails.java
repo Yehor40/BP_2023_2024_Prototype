@@ -16,9 +16,9 @@ public class OrderDetails {
     @JoinColumn(name = "taskId")
     private TaskDepartment taskDepartment;
 
-    @ManyToOne
-    @JoinColumn(name = "orderId")
-    private OrderProject orderProjects;
+    @OneToOne
+    @JoinColumn(name = "order_id")  // Adjust the column name based on your actual database schema
+    private OrderProject orderProject;
     private String timeSpent;
     private String realTime;
     private String charge;
@@ -42,11 +42,11 @@ public class OrderDetails {
 
 
     public OrderProject getOrderProjects() {
-        return orderProjects;
+        return orderProject;
     }
 
-    public void setOrderProjects(OrderProject orderProjects) {
-        this.orderProjects = orderProjects;
+    public void setOrderProjects(OrderProject orderProject) {
+        this.orderProject = orderProject;
     }
 
     public String getTimeSpent() {
@@ -103,5 +103,13 @@ public class OrderDetails {
 
     public void setMonth(String month) {
         this.month = month;
+    }
+
+    public TaskDepartment getTaskDepartment() {
+        return taskDepartment;
+    }
+
+    public void setTaskDepartment(TaskDepartment taskDepartment) {
+        this.taskDepartment = taskDepartment;
     }
 }

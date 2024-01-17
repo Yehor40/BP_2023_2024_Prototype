@@ -33,7 +33,7 @@ public class ProjectController {
         return ResponseEntity.ok(newProject);
     }
     @PutMapping("update/{id}")
-    public ResponseEntity<OrderProject> updateProject(@PathVariable Long id, @RequestBody OrderProject project) {
+    public ResponseEntity<OrderProject> updateProject(@PathVariable String id, @RequestBody OrderProject project) {
         if (!project.getOrderId().equals(id)) {
             return ResponseEntity.badRequest().build();
         }

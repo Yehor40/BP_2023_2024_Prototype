@@ -1,25 +1,47 @@
 package com.example.bp_2023_2024.models;
 
 import jakarta.persistence.*;
-
 @Entity
-    public class User {
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long userId;
-        private String username;
-        private String password;
-        @Column(nullable = false, columnDefinition = "TINYINT(1)")
-        private boolean isAdmin;
+public class User {
 
-        // Getters and setters
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long user_id;
 
-    public Long getUserId() {
-        return userId;
+     // Example validation annotation
+    private String username;
+
+
+    private String password;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
+    private UserRole role;
+
+    public User() {
+        // Default constructor
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public User(Long user_id, String username, String password, UserRole role) {
+        this.user_id = user_id;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+
+    // Getters and setters
+
+    // Uncomment if you want to allow setting userId manually
+    // public void setUserId(Long userId) {
+    //     this.userId = userId;
+    // }
+
+    public Long getUserId() {
+        return user_id;
+    }
+
+    public void setUserId(Long user_id) {
+        this.user_id = user_id;
     }
 
     public String getUsername() {
@@ -38,14 +60,11 @@ import jakarta.persistence.*;
         this.password = password;
     }
 
-    public boolean isAdmin() {
-        return isAdmin;
+    public UserRole getRole() {
+        return role;
     }
 
-    public void setAdmin(boolean admin) {
-        isAdmin = admin;
+    public void setRole(UserRole role) {
+        this.role = role;
     }
 }
-
-
-

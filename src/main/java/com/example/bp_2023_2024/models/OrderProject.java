@@ -8,30 +8,31 @@ public class OrderProject {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    private Integer orderId;
+    private Long orderId;
     private String project;
 
 
     @ManyToOne
-    @JoinColumn(name = "task_id")
+    @JoinColumn(name = "taskId")
     private TaskDepartment taskDepartment;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "user_project",
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> users;
 
-//    @OneToMany(fetch = FetchType.EAGER)
-//    private List <OrderDetails> orderDetailsList;
+    @OneToOne(mappedBy = "orderProject", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private OrderDetails orderDetails;
+
 
     //constructors,getters,setters
 
-    public Integer getOrderId() {
+    public Long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(Integer orderId) {
+    public void setOrderId(Long orderId) {
         this.orderId = orderId;
     }
 
@@ -44,12 +45,12 @@ public class OrderProject {
     }
 
 
-    public OrderProject(Integer orderId, String project, TaskDepartment taskDepartment, List<User> users, List<OrderDetails> orderDetailsList) {
+    public OrderProject(Long orderId, String project, TaskDepartment taskDepartment, List<User> users, OrderDetails orderDetails) {
         this.orderId = orderId;
         this.project = project;
         this.taskDepartment = taskDepartment;
         this.users = users;
-       // this.orderDetailsList = orderDetailsList;
+        this.orderDetails = orderDetails;
     }
     public OrderProject(){}
 }
