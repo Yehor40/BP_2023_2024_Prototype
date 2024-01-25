@@ -48,7 +48,7 @@ import java.util.List;
 
         @PostMapping("/users/create")
         public String createUser(@ModelAttribute("newUser") User newUser,Model model) {
-            model.addAttribute("successMessage", "User successfully created!");
+
             userService.createUser(newUser);
             return "redirect:/users";
         }
@@ -63,16 +63,13 @@ import java.util.List;
         @PostMapping("/users/{id}/edit")
         public String editUser(@PathVariable Long id,
                                @ModelAttribute("user") User updatedUser,
-                               UserRole newRole,
                                RedirectAttributes redirectAttributes) {
             // Validate and update the user
 
             try {
-                userService.updateUser(id, updatedUser, newRole);
-                redirectAttributes.addFlashAttribute("successMessage", "User updated successfully");
+                userService.updateUser(id, updatedUser);
             } catch (EntityNotFoundException e) {
                 // Handle the case where the user is not found
-                redirectAttributes.addFlashAttribute("errorMessage", "User not found");
             }
 
             return "redirect:/users";

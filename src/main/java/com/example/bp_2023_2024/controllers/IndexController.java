@@ -12,6 +12,14 @@ public class IndexController {
     }
 
     @Controller
+    public class AboutController {
+        @GetMapping("/about")
+        public String main(Model model) {
+            model.addAttribute("about", "About Page");
+            return "about";
+        }
+    }
+    @Controller
     public class ErrorController {
         @GetMapping("/error")
         public String main(Model model) {

@@ -7,6 +7,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
@@ -37,8 +38,7 @@ public class UserService {
     }
 
     @Transactional
-    public User updateUser(Long id,User updatedUser,UserRole newRole)  {
-
+    public User updateUser(Long id,User updatedUser)  {
         User existingUser = new User();
 
         existingUser = userRepository.findById(id).orElseThrow();
@@ -46,7 +46,7 @@ public class UserService {
         // Update the properties of the existing user
         existingUser.setUsername(updatedUser.getUsername());
         existingUser.setPassword(updatedUser.getPassword());
-        existingUser.setRole(newRole);
+        existingUser.setRole(updatedUser.getRole());
         return userRepository.save(existingUser);
     }
 

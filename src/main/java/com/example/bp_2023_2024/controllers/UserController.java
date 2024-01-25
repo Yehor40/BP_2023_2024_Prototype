@@ -46,7 +46,7 @@ public class UserController {
         if (!user.getUserId().equals(id)) {
             return ResponseEntity.badRequest().build();
         }
-        User updatedUser = userService.updateUser(id,user,newRole);
+        User updatedUser = userService.updateUser(id,user);
        // userService.updateUserRole(id,newRole);
         return ResponseEntity.ok(updatedUser);
     }

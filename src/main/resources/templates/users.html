@@ -4,39 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User List</title>
+    <!-- Link to Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Add any additional styling or custom CSS files here -->
+    <style>
+        body {
+            background-color: #fff; /* Set white background */
+            padding: 20px; /* Add some padding for better readability */
+        }
+    </style>
 </head>
 <body>
+<header th:insert="blocks/headerAdmin :: headerAdmin"></header>
+<a class="me-3 py-2 text-dark text-decoration-none" href="/">Back</a>
 
-<h2>User List</h2>
-<a href="/">Back</a>
-<table border="1">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Username</th>
-        <th>Password</th>
-        <th>Role</th>
-        <th>User details</th>
-        <th>Actions</th>
-        <!-- Add more columns as needed -->
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="user : ${users}">
-        <td th:text="${user.userId}"></td>
-        <td th:text="${user.username}"></td>
-        <td th:text="${user.password}"></td>
-        <td th:text="${user.role}"></td>
-        <td><a th:href="'/users/'+${user.userId}">More</a></td>
-        <td><a th:href="'/users/'+${user.userId}+'/delete'"
-               onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
-            <a th:href="'/users/'+${user.userId}+'/edit'">Edit user</a>
+<div class="container">
+    <h2>User List</h2>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Role</th>
+            <th>User details</th>
+            <th>Actions</th>
+            <!-- Add more columns as needed -->
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.userId}"></td>
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.password}"></td>
+            <td th:text="${user.role}"></td>
+            <td class="text-center"><a class="btn btn-primary" th:href="'/users/'+${user.userId}">More</a></td>
+            <td class="text-center">
+                <a class="btn btn-danger" th:href="'/users/'+${user.userId}+'/delete'"
+                   onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
+                <a class="btn btn-warning" th:href="'/users/'+${user.userId}+'/edit'">Edit user</a>
+            </td>
+            <!-- Add more cells for additional user properties -->
+        </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-success" th:href="'/users/create'">Create User</a>
+</div>
 
-        </td>
-        <!-- Add more cells for additional user properties -->
-    </tr>
-    </tbody>
-</table>
-<a th:href="'/users/create'">Create User</a>
+<footer th:insert="blocks/footer :: footer"></footer>
+
+<!-- Link to Bootstrap JS and Popper.js (if needed) -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

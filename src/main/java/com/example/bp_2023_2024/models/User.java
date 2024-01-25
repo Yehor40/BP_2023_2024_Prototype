@@ -5,10 +5,9 @@ import jakarta.persistence.*;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long user_id;
 
-     // Example validation annotation
     private String username;
 
 
@@ -28,13 +27,6 @@ public class User {
         this.password = password;
         this.role = role;
     }
-
-    // Getters and setters
-
-    // Uncomment if you want to allow setting userId manually
-    // public void setUserId(Long userId) {
-    //     this.userId = userId;
-    // }
 
     public Long getUserId() {
         return user_id;
