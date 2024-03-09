@@ -1,7 +1,12 @@
 package com.example.bp_2023_2024.controllers;
 
+import com.example.bp_2023_2024.models.Task_Details;
+import com.example.bp_2023_2024.models.Project;
+import com.example.bp_2023_2024.models.Project_Task;
 import com.example.bp_2023_2024.models.User;
-import com.example.bp_2023_2024.models.UserRole;
+import com.example.bp_2023_2024.services.DetailsService;
+import com.example.bp_2023_2024.services.ProjectService;
+import com.example.bp_2023_2024.services.TaskService;
 import com.example.bp_2023_2024.services.UserService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +21,32 @@ import java.util.List;
     @Controller
     @SessionAttributes("successMessage")
     public class UserThymeleafController {
-@Autowired
+        @Autowired
         private final UserService userService;
+        private final TaskService taskService;
+        private final DetailsService detailsService;
+        private final ProjectService projectService;
 
-        public UserThymeleafController(UserService userService) {
+        public UserThymeleafController(UserService userService, TaskService taskService, DetailsService detailsService, ProjectService projectService) {
             this.userService = userService;
+            this.taskService = taskService;
+            this.detailsService = detailsService;
+            this.projectService = projectService;
         }
+        @GetMapping("/users/{id}/userActivities")
+        public String activitiesList(Model model, @PathVariable Long id){
+            User user=userService.getUserById(id).orElseThrow();
+            List<Project_Task>tasks = taskService.getAllTasks();
+            List<Task_Details>details = detailsService.getAllDetails();
+            List<Project>projects = projectService.getAllProjects();
+           // List<User>users=userService.getAllUsers();
+            model.addAttribute("users",user);
+            model.addAttribute("tasks",tasks);
+            model.addAttribute("details",details);
+            model.addAttribute("projects",projects);
+            return "userActivities";
+        }
+
 
         @GetMapping("/users")
         public String userList(Model model) {
@@ -74,6 +99,8 @@ import java.util.List;
 
             return "redirect:/users";
         }
+
+
     }
 
 

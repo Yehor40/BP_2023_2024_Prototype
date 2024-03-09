@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-public class TaskDepartment {
+public class Project_Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,19 +13,26 @@ public class TaskDepartment {
     private String taskName;
     private String department;
 
-//    @OneToMany(fetch = FetchType.EAGER)
-//    private List<OrderDetails> taskOrders;
+    @ManyToOne
+    @JoinColumn(name = "projectId")
+    private Project project;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "user_task",
+            joinColumns = @JoinColumn(name = "task_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private List<User> users;
 
     // Constructors, getters, setters
 
     // Constructors
-    public TaskDepartment() {
+    public Project_Task() {
     }
 
-    public TaskDepartment(String taskName, String department ,Long taskId) {
+    public Project_Task(Long taskId, String taskName, String department) {
+        this.taskId = taskId;
         this.taskName = taskName;
         this.department = department;
-        this.taskId= taskId;
     }
 
     // Getters and setters

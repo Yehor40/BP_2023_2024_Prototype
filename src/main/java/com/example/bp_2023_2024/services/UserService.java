@@ -1,15 +1,9 @@
 package com.example.bp_2023_2024.services;
 
 import com.example.bp_2023_2024.models.User;
-import com.example.bp_2023_2024.models.UserRole;
 import com.example.bp_2023_2024.repositories.UserRepository;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityNotFoundException;
-import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,9 +34,7 @@ public class UserService {
     @Transactional
     public User updateUser(Long id,User updatedUser)  {
         User existingUser = new User();
-
         existingUser = userRepository.findById(id).orElseThrow();
-
         // Update the properties of the existing user
         existingUser.setUsername(updatedUser.getUsername());
         existingUser.setPassword(updatedUser.getPassword());

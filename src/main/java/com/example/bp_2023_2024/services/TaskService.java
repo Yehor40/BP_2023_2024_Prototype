@@ -1,9 +1,8 @@
 package com.example.bp_2023_2024.services;
 
-import com.example.bp_2023_2024.models.TaskDepartment;
-import com.example.bp_2023_2024.models.User;
+import com.example.bp_2023_2024.models.Project_Task;
 import com.example.bp_2023_2024.repositories.TaskDepartmentRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.config.Task;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,25 +10,33 @@ import java.util.Optional;
 
 @Service
 public class TaskService {
-    @Autowired
-    private TaskDepartmentRepository taskDepartmentRepository;
-    public List<TaskDepartment> getAllTasks() {
+    private final TaskDepartmentRepository taskDepartmentRepository;
+
+    public TaskService(TaskDepartmentRepository taskDepartmentRepository) {
+        this.taskDepartmentRepository = taskDepartmentRepository;
+    }
+
+    public List<Project_Task> getAllTasks() {
         return taskDepartmentRepository.findAll();
     }
 
-    public Optional<TaskDepartment> getTaskById(String id) {
+    public Optional<Project_Task> getTaskById(Long id) {
         return taskDepartmentRepository.findById(id);
     }
 
-    public TaskDepartment createTask(TaskDepartment task) {
+    public Project_Task createTask(Project_Task task) {
         return taskDepartmentRepository.save(task);
     }
 
-    public TaskDepartment updateTask(TaskDepartment task) {
-        return taskDepartmentRepository.save(task);
+    public Project_Task updateTask(Project_Task updatedtask,Long id) {
+        Project_Task existingTask = new Project_Task();
+        existingTask = taskDepartmentRepository.findById(id).orElseThrow();
+        existingTask.setTaskName(updatedtask.getTaskName());
+        existingTask.setDepartment(updatedtask.getDepartment());
+        return taskDepartmentRepository.save(existingTask);
     }
 
-    public void deleteTask(String id) {
+    public void deleteTask(Long id) {
         taskDepartmentRepository.deleteById(id);
     }
 }

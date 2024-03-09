@@ -1,7 +1,6 @@
 package com.example.bp_2023_2024.controllers;
 
-import com.example.bp_2023_2024.models.OrderDetails;
-import com.example.bp_2023_2024.models.OrderProject;
+import com.example.bp_2023_2024.models.Project;
 import com.example.bp_2023_2024.services.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -17,31 +16,31 @@ public class ProjectController {
     @Autowired
     private ProjectService projects;
     @GetMapping("getProjects")
-    public List<OrderProject> getAllProjects() {
+    public List<Project> getAllProjects() {
         return projects.getAllProjects();
     }
     @GetMapping("getProject/{id}")
-    public ResponseEntity<OrderProject> getProjectById(@PathVariable String id) {
-        Optional<OrderProject> project = projects.getProjectById(id);
+    public ResponseEntity<Project> getProjectById(@PathVariable Long id) {
+        Optional<Project> project = projects.getProjectById(id);
         return project.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
     @PostMapping(path="createProject",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<OrderProject> createProject(@RequestBody OrderProject project) {
-        OrderProject newProject = projects.createProject(project);
+    public ResponseEntity<Project> createProject(@RequestBody Project project) {
+        Project newProject = projects.createProject(project);
         return ResponseEntity.ok(newProject);
     }
     @PutMapping("update/{id}")
-    public ResponseEntity<OrderProject> updateProject(@PathVariable String id, @RequestBody OrderProject project) {
-        if (!project.getOrderId().equals(id)) {
+    public ResponseEntity<Project> updateProject(@PathVariable String id, @RequestBody Project project) {
+        if (!project.getProjectId().equals(id)) {
             return ResponseEntity.badRequest().build();
         }
-        OrderProject updatedProject = projects.saveProject(project);
+        Project updatedProject = projects.saveProject(project);
         return ResponseEntity.ok(updatedProject);
     }
     @DeleteMapping("delete/{id}")
-    public ResponseEntity<Void> deleteProject(@PathVariable String id) {
+    public ResponseEntity<Void> deleteProject(@PathVariable Long id) {
         projects.deleteProject(id);
         return ResponseEntity.noContent().build();
     }

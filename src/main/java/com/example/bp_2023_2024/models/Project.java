@@ -4,17 +4,15 @@ import jakarta.persistence.*;
 
 import java.util.List;
 @Entity
-public class OrderProject {
+public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    private Long orderId;
+    private Long projectId;
     private String project;
 
 
-    @ManyToOne
-    @JoinColumn(name = "taskId")
-    private TaskDepartment taskDepartment;
+
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "user_project",
@@ -22,18 +20,17 @@ public class OrderProject {
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> users;
 
-    @OneToOne(mappedBy = "orderProject", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private OrderDetails orderDetails;
+
 
 
     //constructors,getters,setters
 
-    public Long getOrderId() {
-        return orderId;
+    public Long getProjectId() {
+        return projectId;
     }
 
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
     }
 
     public String getProject() {
@@ -45,12 +42,11 @@ public class OrderProject {
     }
 
 
-    public OrderProject(Long orderId, String project, TaskDepartment taskDepartment, List<User> users, OrderDetails orderDetails) {
-        this.orderId = orderId;
+    public Project(Long projectId, String project, Project_Task projectTask, List<User> users) {
+        this.projectId = projectId;
         this.project = project;
-        this.taskDepartment = taskDepartment;
         this.users = users;
-        this.orderDetails = orderDetails;
+
     }
-    public OrderProject(){}
+    public Project(){}
 }

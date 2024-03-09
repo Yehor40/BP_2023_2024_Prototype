@@ -8,7 +8,7 @@ public class IndexController {
     @GetMapping("/")
     public String main(Model model) {
         model.addAttribute("title", "Main Page");
-        return "index";
+        return "indexAdmin";
     }
 
     @Controller
@@ -27,5 +27,24 @@ public class IndexController {
             return "error";
         }
     }
+
+    @GetMapping("/user/indexUser")
+    public String userDashboard() {
+        return "indexUser";
+    }
+
+    @GetMapping("/admin/indexAdmin")
+    public String adminDashboard() {
+        return "indexAdmin";
+    }
+
+    @GetMapping("/login")
+    public String loginPage() {
+        return "login";
+    }
+
+
+
+
 }
 

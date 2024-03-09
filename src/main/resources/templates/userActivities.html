@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User List</title>
+    <title>User Activities List</title>
     <!-- Link to Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <!-- Add any additional styling or custom CSS files here -->
@@ -16,41 +16,45 @@
 </head>
 <body>
 <header th:insert="blocks/headerAdmin :: headerAdmin"></header>
-<a class="me-3 py-2 text-dark text-decoration-none" href="/">Back</a>
+<a class="me-3 py-2 text-dark text-decoration-none" href="/users">Back</a>
 
 <div class="container">
-    <h2>User List</h2>
+    <h2>User Activities List</h2>
     <table class="table table-bordered">
         <thead class="thead-dark">
         <tr>
-            <th>ID</th>
-            <th>Username</th>
-            <th>Password</th>
-            <th>Role</th>
-            <th>User details</th>
+            <th>Project id</th>
+            <th>Task name</th>
+            <th>Project name</th>
+            <th>Order id</th>
+            <th>Department</th>
+            <th>Estimated time</th>
+            <th>Spent time</th>
+            <th>Charge</th>
+            <th>Total</th>
+            <th>State</th>
+            <th>Month</th>
             <th>Actions</th>
             <!-- Add more columns as needed -->
         </tr>
         </thead>
         <tbody>
-        <tr th:each="user : ${users}">
-            <td th:text="${user.userId}"></td>
-            <td th:text="${user.username}"></td>
-            <td th:text="${user.password}"></td>
-            <td th:text="${user.role}"></td>
-            <td class="text-center"><a class="btn btn-primary" th:href="'/users/'+${user.userId}">More</a></td>
-            <td class="text-center">
-                <a class="btn btn-danger" th:href="'/users/'+${user.userId}+'/delete'"
-                   onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
-                <a class="btn btn-warning" th:href="'/users/'+${user.userId}+'/edit'">Edit user</a>
-                <a class="btn btn-secondary" th:href="'/users/'+${user.userId}+'/userActivities'">User activities</a>
+        <tr th:each="detail : ${details}">
 
-            </td>
-            <!-- Add more cells for additional user properties -->
-        </tr>
+            <td th:text="${detail.projectTask.taskId}"></td>
+        <td th:text="${detail?.projectTask?.taskName}"></td>
+        <td th:text="${detail.orderProjects.project}"></td>
+        <td th:text="${detail.orderProjects.orderId}"></td>
+        <td th:text="${detail?.projectTask?.department}"></td>
+        <td th:text="${detail.realTime}"></td>
+        <td th:text="${detail.timeSpent}"></td>
+        <td th:text="${detail.charge}"></td>
+        <td th:text="${detail.total}"></td>
+        <td th:text="${detail.state}"></td>
+        <td th:text="${detail.month}"></td></tr>
         </tbody>
     </table>
-    <a class="btn btn-success" th:href="'/users/create'">Create User</a>
+
 </div>
 
 <footer th:insert="blocks/footer :: footer"></footer>
